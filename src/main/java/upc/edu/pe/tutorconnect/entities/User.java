@@ -23,7 +23,7 @@ public class User {
     @JoinColumn(name = "user_type_id", referencedColumnName = "id")
     private UserType userType;
 
-    @OneToOne(mappedBy = "user")
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Tutor tutor;
 
 }

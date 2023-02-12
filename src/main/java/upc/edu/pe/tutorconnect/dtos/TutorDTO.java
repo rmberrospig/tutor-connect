@@ -4,20 +4,16 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import upc.edu.pe.tutorconnect.entities.User;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserDTO {
+public class TutorDTO {
+
     private Long id;
-    private String username;
-    private String password;
-    private String firstName;
-    private String lastName;
-    private String email;
-    private UserTypeDTO userTypeDTO;
+    private String descripcion;
+    private double pricePerHour;
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private TutorDTO tutorDTO;
-
-
+    private User userDTO;
 }

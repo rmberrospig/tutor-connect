@@ -6,4 +6,6 @@ import upc.edu.pe.tutorconnect.entities.Tutor;
 
 @Repository
 public interface ITutorRepository extends JpaRepository<Tutor, Long> {
+
+    Tutor findByUserId(Long id);
 }
