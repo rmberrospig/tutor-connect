@@ -1,13 +1,16 @@
 package upc.edu.pe.tutorconnect.controllers;
 
-import jakarta.websocket.server.PathParam;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import upc.edu.pe.tutorconnect.controllers.constants.ResponseConstant;
 import upc.edu.pe.tutorconnect.controllers.generic.GenericController;
+import upc.edu.pe.tutorconnect.dtos.SubjectDTO;
 import upc.edu.pe.tutorconnect.dtos.UserDTO;
+import upc.edu.pe.tutorconnect.services.ISubjectService;
 import upc.edu.pe.tutorconnect.services.IUserService;
 
 import java.util.List;
@@ -19,6 +22,9 @@ import java.util.List;
 public class UserController extends GenericController {
     @Autowired
     private IUserService userService;
+
+    @Autowired
+    private ISubjectService subjectService;
 
     @GetMapping(value = "/")
     public ResponseEntity<?> getAllUser() {
@@ -63,10 +69,25 @@ public class UserController extends GenericController {
     }
 
     @PostMapping(value = "/")
-    public ResponseEntity<?> saveUser(@RequestBody UserDTO userDTO) {
+    public ResponseEntity<?> saveUser(@Valid @RequestBody UserDTO userDTO, BindingResult result) {
+        if(result.hasErrors()){
+            return super.getBadRequest(result);
+        }
+
         try {
-            UserDTO result = this.userService.saveUser(userDTO);
-            return super.getSuccessRequest(result);
+            UserDTO userValid = this.userService.findByUsername(userDTO.getUsername());
+            if(userValid != null)  return super.getBadRequest("Username ya se encuentra registrado");
+            userValid = this.userService.findByEmail(userDTO.getEmail());
+            if(userValid != null)  return super.getBadRequest("Email ya se encuentra registrado");
+            if(userDTO.getUserTypeDTO().getId() == 1) {
+                for(SubjectDTO subject: userDTO.getTutorDTO().getSubjectsDTO()){
+                    SubjectDTO subjectValid = this.subjectService.findById(subject.getId());
+                    if(subjectValid == null)  return super.getBadRequest("Curso no se encuentra registrado");
+                }
+            }
+
+            UserDTO resultUserDTO = this.userService.saveUser(userDTO);
+            return super.getCreatedRequest(resultUserDTO);
         } catch (Exception ex){
             log.error(ex.getMessage());
             return super.getErrorRequest();

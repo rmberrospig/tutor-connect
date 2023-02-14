@@ -4,8 +4,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import upc.edu.pe.tutorconnect.entities.Subject;
-import upc.edu.pe.tutorconnect.entities.User;
+import upc.edu.pe.tutorconnect.entities.Tutor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,12 +12,10 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class TutorDTO {
+public class SubjectDTO {
     private Long id;
-    private String description;
-    private double pricePerHour;
+    private String name;
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private UserDTO userDTO;
-    @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    private List<SubjectDTO> subjectsDTO = new ArrayList<>();
+    private List<TutorDTO> tutorsDTO = new ArrayList<>();
+
 }

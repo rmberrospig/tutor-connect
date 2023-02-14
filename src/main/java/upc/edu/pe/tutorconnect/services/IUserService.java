@@ -12,4 +12,6 @@ public interface IUserService {
     List<UserDTO> findAllUser() throws ServiceException;
     List<UserDTO> findAllStudents() throws ServiceException;
     List<UserDTO> findAllTutor() throws ServiceException;
+    UserDTO findByUsername(String username) throws ServiceException;
+    UserDTO findByEmail(String email) throws ServiceException;
 }
