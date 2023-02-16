@@ -5,8 +5,6 @@ import org.mapstruct.Mapping;
 import upc.edu.pe.tutorconnect.dtos.TutorDTO;
 import upc.edu.pe.tutorconnect.entities.Tutor;
 
-import java.util.List;
-
 
 @Mapper(componentModel = "spring")
 public interface ITutorMapper extends ITutorSubjectMapper {

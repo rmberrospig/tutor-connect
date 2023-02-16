@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Date;
 
 @Entity
@@ -15,9 +18,11 @@ public class Schedule {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Date date;
-    private Date startTime;
-    private Date endTime;
+    private LocalDate date;
+    @Temporal(TemporalType.TIME)
+    private LocalTime startTime;
+    @Temporal(TemporalType.TIME)
+    private LocalTime endTime;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "student_id", referencedColumnName = "id")
@@ -26,4 +31,5 @@ public class Schedule {
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "tutor_id", referencedColumnName = "id")
     private Tutor tutor;
+
 }

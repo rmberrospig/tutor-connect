@@ -5,11 +5,9 @@ import org.mapstruct.Mapping;
 import upc.edu.pe.tutorconnect.dtos.SubjectDTO;
 import upc.edu.pe.tutorconnect.dtos.TutorDTO;
 import upc.edu.pe.tutorconnect.dtos.UserDTO;
-import upc.edu.pe.tutorconnect.dtos.UserTypeDTO;
 import upc.edu.pe.tutorconnect.entities.Subject;
 import upc.edu.pe.tutorconnect.entities.Tutor;
 import upc.edu.pe.tutorconnect.entities.User;
-import upc.edu.pe.tutorconnect.entities.UserType;
 
 import java.util.List;
 

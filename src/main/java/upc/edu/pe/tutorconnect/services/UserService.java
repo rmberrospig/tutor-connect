@@ -111,4 +111,16 @@ public class UserService implements IUserService{
     public UserDTO findByEmail(String email) throws ServiceException {
         return this.userMapper.toDTO(this.userRepository.findByEmail(email).orElse(null));
     }
+
+    @Override
+    public UserDTO findTutorById(Long id) throws ServiceException {
+        User result = this.userRepository.findByIdAndUserTypeId(id, 1L).orElse(null);
+        return this.userMapper.toDTO(result);
+    }
+
+    @Override
+    public UserDTO findStudentById(Long id) throws ServiceException {
+        User result = this.userRepository.findByIdAndUserTypeId(id, 2L).orElse(null);
+        return this.userMapper.toDTO(result);
+    }
 }

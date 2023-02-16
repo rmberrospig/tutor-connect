@@ -17,6 +17,8 @@ public class Subject {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    
     @ManyToMany(mappedBy = "subjects")
     private List<Tutor> tutors = new ArrayList<>();
+
 }

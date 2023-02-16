@@ -68,6 +68,34 @@ public class UserController extends GenericController {
         }
     }
 
+    @GetMapping(value = "/tutors/{id}")
+    public ResponseEntity<?> getTutorById(@PathVariable Long id) {
+        try {
+            UserDTO userDTO = this.userService.findTutorById(id);
+            if(userDTO == null){
+                return super.getNotFoundRequest();
+            }
+            return super.getSuccessRequest(userDTO);
+        } catch (Exception ex){
+            log.error(ex.getMessage());
+            return super.getErrorRequest();
+        }
+    }
+
+    @GetMapping(value = "/students/{id}")
+    public ResponseEntity<?> getStudentById(@PathVariable Long id) {
+        try {
+            UserDTO userDTO = this.userService.findStudentById(id);
+            if(userDTO == null){
+                return super.getNotFoundRequest();
+            }
+            return super.getSuccessRequest(userDTO);
+        } catch (Exception ex){
+            log.error(ex.getMessage());
+            return super.getErrorRequest();
+        }
+    }
+
     @PostMapping(value = "/")
     public ResponseEntity<?> saveUser(@Valid @RequestBody UserDTO userDTO, BindingResult result) {
         if(result.hasErrors()){
