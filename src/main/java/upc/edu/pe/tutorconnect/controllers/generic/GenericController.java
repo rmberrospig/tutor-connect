@@ -58,6 +58,21 @@ public class GenericController {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(res);
     }
 
+    protected ResponseEntity<ResponseREST> getBadRequest(List<Map<String, String>> result){
+        ResponseREST res= 	ResponseREST.builder()
+                .apiVersion(apiVersion)
+                .status(
+                        ResponseStatus.builder()
+                                .code(ResponseEnums.ALERT)
+                                .message(ResponseConstant.MSG_ALERT)
+                                .status(HttpStatus.BAD_REQUEST.value())
+                                .error(HttpStatus.BAD_REQUEST.name())
+                                .details(result)
+                                .build())
+                .build();
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(res);
+    }
+
     protected ResponseEntity<ResponseREST> getBadRequest(String details){
         ResponseREST res= 	ResponseREST.builder()
                 .apiVersion(apiVersion)

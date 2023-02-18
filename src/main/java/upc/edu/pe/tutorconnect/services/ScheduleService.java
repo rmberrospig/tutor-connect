@@ -12,7 +12,10 @@ import upc.edu.pe.tutorconnect.repositories.IScheduleRepository;
 import upc.edu.pe.tutorconnect.repositories.ITutorRepository;
 import upc.edu.pe.tutorconnect.repositories.IUserRepository;
 
-import java.util.List;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
+import java.util.*;
 
 @Service
 public class ScheduleService implements IScheduleService {
@@ -27,8 +30,33 @@ public class ScheduleService implements IScheduleService {
     private ISchedulerMapper schedulerMapper;
 
     @Override
+    public ScheduleDTO findById(Long id) {
+        return this.schedulerMapper.toDTO(this.scheduleRepository.findById(id).orElse(null));
+    }
+
+    @Override
     public List<ScheduleDTO> findAllSchedule() {
         return this.schedulerMapper.getSchedulersDTO(this.scheduleRepository.findAll());
+    }
+
+    @Override
+    public List<ScheduleDTO> findAllScheduleAvailable() {
+        return this.schedulerMapper.getSchedulersDTO(this.scheduleRepository.findAllByUserIdIsNull());
+    }
+
+    @Override
+    public List<ScheduleDTO> findAllScheduleAvailableByDate(LocalDate date) {
+        return this.schedulerMapper.getSchedulersDTO(this.scheduleRepository.findAllByDateAndUserIdIsNull(date));
+    }
+
+    @Override
+    public List<ScheduleDTO> findAllScheduleAvailableByTutor(Long tutorId) {
+        return this.schedulerMapper.getSchedulersDTO(this.scheduleRepository.findAllByTutorIdAndUserIdIsNull(tutorId));
+    }
+
+    @Override
+    public List<ScheduleDTO> findAllScheduleAvailableByTutorAndDate(Long tutorId, LocalDate date) {
+        return this.schedulerMapper.getSchedulersDTO(this.scheduleRepository.findAllByTutorIdAndDateAndUserIdIsNull(tutorId, date));
     }
 
     @Override
@@ -42,18 +70,86 @@ public class ScheduleService implements IScheduleService {
     }
 
     @Override
+    public List<Map<String, String>> isValidRangeTime(ScheduleDTO scheduleDTO) {
+        List<Map<String, String>> messages = new ArrayList<>();
+
+        LocalTime startTime = null;
+        LocalTime endTime = null;
+
+        startTime = LocalTime.parse(scheduleDTO.getStartTime());
+        endTime = LocalTime.parse(scheduleDTO.getEndTime());
+
+        if(startTime.isAfter(endTime)) {
+            Map<String, String> error = new HashMap<>();
+            error.put("horaInicio", "La hora inicio no puede ser superior a la hora fin");
+            messages.add(error);
+            return messages;
+        }
+
+        if(startTime.until(endTime, ChronoUnit.HOURS) != 1) {
+            Map<String, String> error = new HashMap<>();
+            error.put("horaInicio", "La diferencia entre hora inicio y hora fin solo puede ser de 1 hora");
+            messages.add(error);
+            return messages;
+        }
+
+        List<ScheduleDTO> scheduleDTOList = this.schedulerMapper.getSchedulersDTO(this.scheduleRepository.findAllByTutorIdAndDate(scheduleDTO.getTutorDTO().getId(), scheduleDTO.getDate() ));
+
+        boolean isValidStartTime = this.isValidStartTime(scheduleDTO.getStartTime(), scheduleDTOList);
+        boolean isValidEndTime = this.isValidEndTime(scheduleDTO.getEndTime(), scheduleDTOList);
+
+        if(!isValidStartTime) {
+            Map<String, String> error = new HashMap<>();
+            error.put("horaInicio", "La hora inicio ya se encuentra registrada o se cruza con otro horario ya registrado");
+            messages.add(error);
+        }
+
+        if(!isValidEndTime) {
+            Map<String, String> error = new HashMap<>();
+            error.put("horaFin", "La hora fin ya se encuentra registrada o se cruza con otro horario ya registrado");
+            messages.add(error);
+        }
+
+        return messages;
+    }
+
+    private boolean isValidStartTime(String startTime, List<ScheduleDTO> scheduleDTOList) {
+        LocalTime time = LocalTime.parse(startTime);
+        Long result = scheduleDTOList.stream().filter(s -> LocalTime.parse(s.getStartTime()).equals(time)).count();
+        if (result > 0) return false;
+        result = scheduleDTOList.stream().filter(s -> LocalTime.parse(s.getStartTime()).isBefore(time) && LocalTime.parse(s.getEndTime()).isAfter(time)).count();
+        if (result > 0) return false;
+        return true;
+    }
+
+    private boolean isValidEndTime(String endTime, List<ScheduleDTO> scheduleDTOList) {
+        LocalTime time = LocalTime.parse(endTime);
+        Long result = scheduleDTOList.stream().filter(s -> LocalTime.parse(s.getEndTime()).equals(time)).count();
+        if (result > 0) return false;
+        result = scheduleDTOList.stream().filter(s -> LocalTime.parse(s.getStartTime()).isBefore(time) && LocalTime.parse(s.getEndTime()).isAfter(time)).count();
+        if (result > 0) return false;
+        return true;
+    }
+
+    @Override
     public ScheduleDTO saveSchedule(ScheduleDTO scheduleDTO) {
         Schedule schedule = this.schedulerMapper.toEntity(scheduleDTO);
         Tutor tutor = this.tutorRepository.findById(schedule.getTutor().getId()).orElse(null);
         schedule.setTutor(tutor);
-        User user = this.userRepository.findById(schedule.getUser().getId()).orElse(null);
-        schedule.setUser(user);
+        //User user = this.userRepository.findById(schedule.getUser().getId()).orElse(null);
+        //schedule.setUser(user);
         return this.schedulerMapper.toDTO(this.scheduleRepository.save(schedule));
     }
 
     @Override
     public ScheduleDTO updateSchedule(Long id, ScheduleDTO scheduleDTO) {
-        Schedule schedule = this.schedulerMapper.toEntity(scheduleDTO);
+        Schedule schedule = this.scheduleRepository.findById(id).orElse(null);
+        if(schedule != null) {
+            Tutor tutor = this.tutorRepository.findById(schedule.getTutor().getId()).orElse(null);
+            schedule.setTutor(tutor);
+            User user = this.userRepository.findById(scheduleDTO.getUserDTO().getId()).orElse(null);
+            schedule.setUser(user);
+        }
         return this.schedulerMapper.toDTO(this.scheduleRepository.save(schedule));
     }
 
