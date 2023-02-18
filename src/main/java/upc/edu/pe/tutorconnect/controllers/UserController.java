@@ -19,6 +19,7 @@ import java.util.List;
 @Slf4j
 @RestController
 @RequestMapping(ResponseConstant.API_USER)
+@CrossOrigin(origins = "http://localhost:4200", methods = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE } , allowedHeaders = "*")
 public class UserController extends GenericController {
     @Autowired
     private IUserService userService;

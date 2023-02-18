@@ -22,6 +22,7 @@ import java.util.Map;
 @Slf4j
 @RestController
 @RequestMapping(ResponseConstant.API_SCHEDULE)
+@CrossOrigin(origins = "http://localhost:4200", methods = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE } , allowedHeaders = "*")
 public class ScheduleController extends GenericController {
 
     @Autowired
