@@ -2,11 +2,9 @@ package upc.edu.pe.tutorconnect.mappers;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.Named;
 import upc.edu.pe.tutorconnect.dtos.ScheduleDTO;
 import upc.edu.pe.tutorconnect.entities.Schedule;
 
-import java.sql.Time;
 import java.time.LocalTime;
 import java.util.List;
 

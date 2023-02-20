@@ -30,7 +30,7 @@ public class UserController extends GenericController {
     public ResponseEntity<?> getAllUser() {
         try {
             List<UserDTO> lst = this.userService.findAllUser();
-            if(lst == null || lst.size() == 0){
+            if(lst == null || lst.isEmpty()){
                 return super.getNotContentRequest();
             }
             return super.getSuccessRequest(lst);
@@ -44,7 +44,7 @@ public class UserController extends GenericController {
     public ResponseEntity<?> getAllStudents() {
         try {
             List<UserDTO> lst = this.userService.findAllStudents();
-            if(lst == null || lst.size() == 0){
+            if(lst == null || lst.isEmpty()){
                 return super.getNotContentRequest();
             }
             return super.getSuccessRequest(lst);
@@ -58,7 +58,7 @@ public class UserController extends GenericController {
     public ResponseEntity<?> getAllTutors() {
         try {
             List<UserDTO> lst = this.userService.findAllTutor();
-            if(lst == null || lst.size() == 0){
+            if(lst == null || lst.isEmpty()){
                 return super.getNotContentRequest();
             }
             return super.getSuccessRequest(lst);

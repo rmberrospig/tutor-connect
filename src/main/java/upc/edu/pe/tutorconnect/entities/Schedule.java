@@ -1,8 +1,10 @@
 package upc.edu.pe.tutorconnect.entities;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -11,6 +13,8 @@ import java.time.LocalTime;
 @Table(name="TB_SCHEDULE")
 @Data
 @EqualsAndHashCode
+@AllArgsConstructor
+@NoArgsConstructor
 public class Schedule {
 
     @Id

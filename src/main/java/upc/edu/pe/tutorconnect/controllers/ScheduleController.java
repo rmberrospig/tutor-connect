@@ -35,7 +35,7 @@ public class ScheduleController extends GenericController {
     public ResponseEntity<?> getAllScheduler() {
         try {
             List<ScheduleDTO> lst = this.scheduleService.findAllSchedule();
-            if(lst == null || lst.size() == 0){
+            if(lst == null || lst.isEmpty()){
                 return super.getNotContentRequest();
             }
             return super.getSuccessRequest(lst);
@@ -49,7 +49,7 @@ public class ScheduleController extends GenericController {
     public ResponseEntity<?> getAllSchedulerAvailable() {
         try {
             List<ScheduleDTO> lst = this.scheduleService.findAllScheduleAvailable();
-            if(lst == null || lst.size() == 0){
+            if(lst == null || lst.isEmpty()){
                 return super.getNotContentRequest();
             }
             return super.getSuccessRequest(lst);
@@ -63,7 +63,7 @@ public class ScheduleController extends GenericController {
     public ResponseEntity<?> getAllSchedulerAvailableByDate(@RequestParam("date") @DateTimeFormat(pattern = "yyyy-MM-dd")LocalDate date) {
         try {
             List<ScheduleDTO> lst = this.scheduleService.findAllScheduleAvailableByDate(date);
-            if(lst == null || lst.size() == 0){
+            if(lst == null || lst.isEmpty()){
                 return super.getNotContentRequest();
             }
             return super.getSuccessRequest(lst);
@@ -77,7 +77,7 @@ public class ScheduleController extends GenericController {
     public ResponseEntity<?> getAllSchedulerTutorById(@PathVariable Long id) {
         try {
             List<ScheduleDTO> lst = this.scheduleService.findAllScheduleByTutor(id);
-            if(lst == null || lst.size() == 0){
+            if(lst == null || lst.isEmpty()){
                 return super.getNotContentRequest();
             }
             return super.getSuccessRequest(lst);
@@ -91,7 +91,7 @@ public class ScheduleController extends GenericController {
     public ResponseEntity<?> getAllSchedulerAvailableByTutorId(@PathVariable Long id) {
         try {
             List<ScheduleDTO> lst = this.scheduleService.findAllScheduleAvailableByTutor(id);
-            if(lst == null || lst.size() == 0){
+            if(lst == null || lst.isEmpty()){
                 return super.getNotContentRequest();
             }
             return super.getSuccessRequest(lst);
@@ -105,7 +105,7 @@ public class ScheduleController extends GenericController {
     public ResponseEntity<?> getAllSchedulerAvailableByTutorId(@PathVariable Long id, @RequestParam("date") @DateTimeFormat(pattern = "yyyy-MM-dd")LocalDate date) {
         try {
             List<ScheduleDTO> lst = this.scheduleService.findAllScheduleAvailableByTutorAndDate(id, date);
-            if(lst == null || lst.size() == 0){
+            if(lst == null || lst.isEmpty()){
                 return super.getNotContentRequest();
             }
             return super.getSuccessRequest(lst);
@@ -119,7 +119,7 @@ public class ScheduleController extends GenericController {
     public ResponseEntity<?> getAllSchedulerStudentById(@PathVariable Long id) {
         try {
             List<ScheduleDTO> lst = this.scheduleService.findAllScheduleByStudent(id);
-            if(lst == null || lst.size() == 0){
+            if(lst == null || lst.isEmpty()){
                 return super.getNotContentRequest();
             }
             return super.getSuccessRequest(lst);

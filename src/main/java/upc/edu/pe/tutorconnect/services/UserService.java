@@ -3,16 +3,13 @@ package upc.edu.pe.tutorconnect.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import upc.edu.pe.tutorconnect.dtos.SubjectDTO;
-import upc.edu.pe.tutorconnect.dtos.TutorDTO;
 import upc.edu.pe.tutorconnect.dtos.UserDTO;
 import upc.edu.pe.tutorconnect.entities.Subject;
 import upc.edu.pe.tutorconnect.entities.Tutor;
 import upc.edu.pe.tutorconnect.entities.User;
 import upc.edu.pe.tutorconnect.entities.UserType;
 import upc.edu.pe.tutorconnect.mappers.ISubjectMapper;
-import upc.edu.pe.tutorconnect.mappers.ITutorMapper;
 import upc.edu.pe.tutorconnect.mappers.IUserMapper;
-import upc.edu.pe.tutorconnect.mappers.IUserTypeMapper;
 import upc.edu.pe.tutorconnect.repositories.ISubjectRepository;
 import upc.edu.pe.tutorconnect.repositories.ITutorRepository;
 import upc.edu.pe.tutorconnect.repositories.IUserRepository;
@@ -44,24 +41,23 @@ public class UserService implements IUserService{
         UserType userTypeEntity = this.useTypeRepositoryRepository.findById(userEntity.getUserType().getId()).orElse(null);
         userEntity.setUserType(userTypeEntity);
         if(userDTO.getUserTypeDTO().getId() == 1) {
-
-            List<Subject> subjects = new ArrayList<>();
-            for (SubjectDTO dto: userDTO.getTutorDTO().getSubjectsDTO()) {
-                subjects.add(this.subjectRepository.findById(dto.getId()).orElse(null));
-            }
-
+            List<Subject> subjects = getListSubjects(userDTO.getTutorDTO().getSubjectsDTO());
             Tutor tutor = userEntity.getTutor();
             tutor.setUser(userEntity);
             tutor.setSubjects(subjects);
-
             userEntity.setTutor(tutor);
-
         }
         User result = this.userRepository.save(userEntity);
         result.setPassword(null);
+        return this.userMapper.toDTO(result);
+    }
 
-        UserDTO resultDTO = this.userMapper.toDTO(result);
-        return resultDTO;
+    public List<Subject> getListSubjects(List<SubjectDTO> subjectDTOS) throws ServiceException {
+        List<Subject> subjects = new ArrayList<>();
+        for (SubjectDTO dto: subjectDTOS) {
+            subjects.add(this.subjectRepository.findById(dto.getId()).orElse(null));
+        }
+        return subjects;
     }
 
     @Override
