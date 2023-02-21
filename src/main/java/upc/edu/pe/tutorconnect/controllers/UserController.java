@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import upc.edu.pe.tutorconnect.controllers.commons.ResponseREST;
 import upc.edu.pe.tutorconnect.controllers.constants.ResponseConstant;
 import upc.edu.pe.tutorconnect.controllers.generic.GenericController;
 import upc.edu.pe.tutorconnect.dtos.SubjectDTO;
@@ -27,7 +28,7 @@ public class UserController extends GenericController {
     private ISubjectService subjectService;
 
     @GetMapping(value = "/")
-    public ResponseEntity<?> getAllUser() {
+    public ResponseEntity<ResponseREST> getAllUser() {
         try {
             List<UserDTO> lst = this.userService.findAllUser();
             if(lst == null || lst.isEmpty()){
@@ -41,7 +42,7 @@ public class UserController extends GenericController {
     }
 
     @GetMapping(value = "/students/")
-    public ResponseEntity<?> getAllStudents() {
+    public ResponseEntity<ResponseREST> getAllStudents() {
         try {
             List<UserDTO> lst = this.userService.findAllStudents();
             if(lst == null || lst.isEmpty()){
@@ -55,7 +56,7 @@ public class UserController extends GenericController {
     }
 
     @GetMapping(value = "/tutors/")
-    public ResponseEntity<?> getAllTutors() {
+    public ResponseEntity<ResponseREST> getAllTutors() {
         try {
             List<UserDTO> lst = this.userService.findAllTutor();
             if(lst == null || lst.isEmpty()){
@@ -69,7 +70,7 @@ public class UserController extends GenericController {
     }
 
     @GetMapping(value = "/tutors/{id}")
-    public ResponseEntity<?> getTutorById(@PathVariable Long id) {
+    public ResponseEntity<ResponseREST> getTutorById(@PathVariable Long id) {
         try {
             UserDTO userDTO = this.userService.findTutorById(id);
             if(userDTO == null){
@@ -83,7 +84,7 @@ public class UserController extends GenericController {
     }
 
     @GetMapping(value = "/students/{id}")
-    public ResponseEntity<?> getStudentById(@PathVariable Long id) {
+    public ResponseEntity<ResponseREST> getStudentById(@PathVariable Long id) {
         try {
             UserDTO userDTO = this.userService.findStudentById(id);
             if(userDTO == null){
@@ -97,7 +98,7 @@ public class UserController extends GenericController {
     }
 
     @PostMapping(value = "/")
-    public ResponseEntity<?> saveUser(@Valid @RequestBody UserDTO userDTO, BindingResult result) {
+    public ResponseEntity<ResponseREST> saveUser(@Valid @RequestBody UserDTO userDTO, BindingResult result) {
         if(result.hasErrors()){
             return super.getBadRequest(result);
         }
@@ -123,7 +124,7 @@ public class UserController extends GenericController {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<?> updateUser(@PathVariable Long id, @RequestBody UserDTO userDTO) {
+    public ResponseEntity<ResponseREST> updateUser(@PathVariable Long id, @RequestBody UserDTO userDTO) {
         try {
             UserDTO result = this.userService.updateUser(id, userDTO);
             if(result == null) return super.getNotFoundRequest();

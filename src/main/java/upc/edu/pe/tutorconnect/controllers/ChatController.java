@@ -10,13 +10,10 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentLinkedQueue;
 
 @Slf4j
 @RestController
 public class ChatController {
-
-    // private final ConcurrentLinkedQueue<String> messages = new ConcurrentLinkedQueue<>();
 
     ConcurrentHashMap<Integer, List<String>> messages = new ConcurrentHashMap<>();
 
@@ -39,7 +36,7 @@ public class ChatController {
         if (messages.containsKey(chatId)) {
             messages.get(chatId).add(message);
         } else {
-            messages.put(chatId, new ArrayList<String>());
+            messages.put(chatId, new ArrayList<>());
             messages.get(chatId).add(message);
         }
 

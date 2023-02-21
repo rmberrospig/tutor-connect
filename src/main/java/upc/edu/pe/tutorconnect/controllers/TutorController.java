@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import upc.edu.pe.tutorconnect.controllers.commons.ResponseREST;
 import upc.edu.pe.tutorconnect.controllers.constants.ResponseConstant;
 import upc.edu.pe.tutorconnect.controllers.generic.GenericController;
 import upc.edu.pe.tutorconnect.dtos.SubjectDTO;
@@ -27,7 +28,7 @@ public class TutorController extends GenericController {
 
 
     @GetMapping(value = "/")
-    public ResponseEntity<?> getAllTutor() {
+    public ResponseEntity<ResponseREST> getAllTutor() {
         try {
             List<TutorDTO> lst = this.tutorService.findAllTutor();
             if (lst == null || lst.isEmpty()) {
@@ -41,7 +42,7 @@ public class TutorController extends GenericController {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<?> getTutorById(@PathVariable Long id) {
+    public ResponseEntity<ResponseREST> getTutorById(@PathVariable Long id) {
         try {
             TutorDTO tutorDTO = this.tutorService.findTutorById(id);
             if (tutorDTO == null) {

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import upc.edu.pe.tutorconnect.controllers.commons.ResponseREST;
 import upc.edu.pe.tutorconnect.controllers.constants.ResponseConstant;
 import upc.edu.pe.tutorconnect.controllers.generic.GenericController;
 import upc.edu.pe.tutorconnect.dtos.SubjectDTO;
@@ -21,7 +22,7 @@ public class SubjectController extends GenericController {
     private ISubjectService subjectService;
 
     @GetMapping(value = "/")
-    public ResponseEntity<?> getAllSubjects() {
+    public ResponseEntity<ResponseREST> getAllSubjects() {
         try {
             List<SubjectDTO> lst = this.subjectService.findAllSubjects();
             if(lst == null || lst.isEmpty()) {
@@ -35,7 +36,7 @@ public class SubjectController extends GenericController {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<?> findSubjectById(@PathVariable Long id) {
+    public ResponseEntity<ResponseREST> findSubjectById(@PathVariable Long id) {
         try {
             SubjectDTO subjectDTO = this.subjectService.findById(id);
             if(subjectDTO == null){
@@ -49,7 +50,7 @@ public class SubjectController extends GenericController {
     }
 
     @PostMapping(value = "/")
-    public ResponseEntity<?> saveSubject(@Valid @RequestBody SubjectDTO subjectDTO, BindingResult result) {
+    public ResponseEntity<ResponseREST> saveSubject(@Valid @RequestBody SubjectDTO subjectDTO, BindingResult result) {
         if(result.hasErrors()){
             return super.getBadRequest(result);
         }
@@ -67,7 +68,7 @@ public class SubjectController extends GenericController {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<?> updateSubject(@PathVariable Long id, @RequestBody SubjectDTO subjectDTO) {
+    public ResponseEntity<ResponseREST> updateSubject(@PathVariable Long id, @RequestBody SubjectDTO subjectDTO) {
         try {
             SubjectDTO result = this.subjectService.updateSubject(id, subjectDTO);
             if(result == null) return super.getNotFoundRequest();

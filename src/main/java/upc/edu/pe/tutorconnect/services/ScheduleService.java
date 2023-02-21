@@ -1,5 +1,6 @@
 package upc.edu.pe.tutorconnect.services;
 
+import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -116,19 +117,21 @@ public class ScheduleService implements IScheduleService {
     }
 
     private boolean isValidStartTime(LocalTime startTime, List<ScheduleDTO> scheduleDTOList) {
-        Long result = scheduleDTOList.stream().filter(s -> LocalTime.parse(s.getStartTime()).equals(startTime)).count();
-        if (result > 0) return false;
-        result = scheduleDTOList.stream().filter(s -> LocalTime.parse(s.getStartTime()).isBefore(startTime) && LocalTime.parse(s.getEndTime()).isAfter(startTime)).count();
-        if (result > 0) return false;
-        return true;
+        return scheduleDTOList.stream().noneMatch(s -> {
+            LocalTime sStartTime = LocalTime.parse(s.getStartTime());
+            LocalTime sEndTime = LocalTime.parse(s.getEndTime());
+            return sStartTime.equals(startTime) ||
+                    sStartTime.isBefore(startTime) && sEndTime.isAfter(startTime);
+        });
     }
 
     private boolean isValidEndTime(LocalTime endTime, List<ScheduleDTO> scheduleDTOList) {
-        Long result = scheduleDTOList.stream().filter(s -> LocalTime.parse(s.getEndTime()).equals(endTime)).count();
-        if (result > 0) return false;
-        result = scheduleDTOList.stream().filter(s -> LocalTime.parse(s.getStartTime()).isBefore(endTime) && LocalTime.parse(s.getEndTime()).isAfter(endTime)).count();
-        if (result > 0) return false;
-        return true;
+        return scheduleDTOList.stream().noneMatch(s -> {
+            LocalTime sStartTime = LocalTime.parse(s.getStartTime());
+            LocalTime sEndTime = LocalTime.parse(s.getEndTime());
+            return sEndTime.equals(endTime) ||
+                    sStartTime.isBefore(endTime) && sEndTime.isAfter(endTime);
+        });
     }
 
     @Override
@@ -138,21 +141,27 @@ public class ScheduleService implements IScheduleService {
         schedule.setTutor(tutor);
         User user = this.userRepository.findById(schedule.getUser().getId()).orElse(null);
         schedule.setUser(user);
-        // Schedule result = this.scheduleRepository.save(schedule);
         return this.schedulerMapper.toDTO(this.scheduleRepository.save(schedule));
     }
 
     @Override
-    public ScheduleDTO updateSchedule(Long id, ScheduleDTO scheduleDTO) {
-        Schedule schedule = this.scheduleRepository.findById(id).orElse(null);
-        if (schedule != null) {
-            Tutor tutor = this.tutorRepository.findById(schedule.getTutor().getId()).orElse(null);
-            schedule.setTutor(tutor);
-            User user = this.userRepository.findById(scheduleDTO.getUserDTO().getId()).orElse(null);
-            schedule.setUser(user);
-        }
-        //Schedule result = this.scheduleRepository.save(schedule);
-        return this.schedulerMapper.toDTO(this.scheduleRepository.save(schedule));
+    public ScheduleDTO updateSchedule(@NonNull Long id, @NonNull ScheduleDTO scheduleDTO) {
+        Objects.requireNonNull(id, "El id no puede ser nulo");
+        Objects.requireNonNull(scheduleDTO, "El objeto ScheduleDTO no puede ser nulo");
+
+        return this.scheduleRepository.findById(id)
+                .map(schedule -> {
+                    Tutor tutor = this.tutorRepository.findById(scheduleDTO.getTutorDTO().getId())
+                            .orElseThrow(() -> new IllegalArgumentException("El tutor no existe"));
+                    schedule.setTutor(tutor);
+
+                    User user = this.userRepository.findById(scheduleDTO.getUserDTO().getId())
+                            .orElseThrow(() -> new IllegalArgumentException("El usuario no existe"));
+                    schedule.setUser(user);
+
+                    return this.schedulerMapper.toDTO(this.scheduleRepository.save(schedule));
+                })
+                .orElseThrow(() -> new IllegalArgumentException("El Schedule no existe"));
     }
 
     @Override

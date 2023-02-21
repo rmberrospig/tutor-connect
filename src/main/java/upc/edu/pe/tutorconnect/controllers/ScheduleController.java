@@ -6,6 +6,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import upc.edu.pe.tutorconnect.controllers.commons.ResponseREST;
 import upc.edu.pe.tutorconnect.controllers.constants.ResponseConstant;
 import upc.edu.pe.tutorconnect.controllers.generic.GenericController;
 import upc.edu.pe.tutorconnect.dtos.ScheduleDTO;
@@ -32,7 +33,7 @@ public class ScheduleController extends GenericController {
     private ITutorService tutorService;
 
     @GetMapping(value = "/")
-    public ResponseEntity<?> getAllScheduler() {
+    public ResponseEntity<ResponseREST> getAllScheduler() {
         try {
             List<ScheduleDTO> lst = this.scheduleService.findAllSchedule();
             if(lst == null || lst.isEmpty()){
@@ -46,7 +47,7 @@ public class ScheduleController extends GenericController {
     }
 
     @GetMapping(value = "/available/")
-    public ResponseEntity<?> getAllSchedulerAvailable() {
+    public ResponseEntity<ResponseREST> getAllSchedulerAvailable() {
         try {
             List<ScheduleDTO> lst = this.scheduleService.findAllScheduleAvailable();
             if(lst == null || lst.isEmpty()){
@@ -60,7 +61,7 @@ public class ScheduleController extends GenericController {
     }
 
     @GetMapping(value = "/available")
-    public ResponseEntity<?> getAllSchedulerAvailableByDate(@RequestParam("date") @DateTimeFormat(pattern = "yyyy-MM-dd")LocalDate date) {
+    public ResponseEntity<ResponseREST> getAllSchedulerAvailableByDate(@RequestParam("date") @DateTimeFormat(pattern = "yyyy-MM-dd")LocalDate date) {
         try {
             List<ScheduleDTO> lst = this.scheduleService.findAllScheduleAvailableByDate(date);
             if(lst == null || lst.isEmpty()){
@@ -74,7 +75,7 @@ public class ScheduleController extends GenericController {
     }
 
     @GetMapping(value = "/tutor/{id}")
-    public ResponseEntity<?> getAllSchedulerTutorById(@PathVariable Long id) {
+    public ResponseEntity<ResponseREST> getAllSchedulerTutorById(@PathVariable Long id) {
         try {
             List<ScheduleDTO> lst = this.scheduleService.findAllScheduleByTutor(id);
             if(lst == null || lst.isEmpty()){
@@ -88,7 +89,7 @@ public class ScheduleController extends GenericController {
     }
 
     @GetMapping(value = "/tutor/{id}/available/")
-    public ResponseEntity<?> getAllSchedulerAvailableByTutorId(@PathVariable Long id) {
+    public ResponseEntity<ResponseREST> getAllSchedulerAvailableByTutorId(@PathVariable Long id) {
         try {
             List<ScheduleDTO> lst = this.scheduleService.findAllScheduleAvailableByTutor(id);
             if(lst == null || lst.isEmpty()){
@@ -102,7 +103,7 @@ public class ScheduleController extends GenericController {
     }
 
     @GetMapping(value = "/tutor/{id}/available")
-    public ResponseEntity<?> getAllSchedulerAvailableByTutorId(@PathVariable Long id, @RequestParam("date") @DateTimeFormat(pattern = "yyyy-MM-dd")LocalDate date) {
+    public ResponseEntity<ResponseREST> getAllSchedulerAvailableByTutorId(@PathVariable Long id, @RequestParam("date") @DateTimeFormat(pattern = "yyyy-MM-dd")LocalDate date) {
         try {
             List<ScheduleDTO> lst = this.scheduleService.findAllScheduleAvailableByTutorAndDate(id, date);
             if(lst == null || lst.isEmpty()){
@@ -116,7 +117,7 @@ public class ScheduleController extends GenericController {
     }
 
     @GetMapping(value = "/student/{id}")
-    public ResponseEntity<?> getAllSchedulerStudentById(@PathVariable Long id) {
+    public ResponseEntity<ResponseREST> getAllSchedulerStudentById(@PathVariable Long id) {
         try {
             List<ScheduleDTO> lst = this.scheduleService.findAllScheduleByStudent(id);
             if(lst == null || lst.isEmpty()){
@@ -130,7 +131,7 @@ public class ScheduleController extends GenericController {
     }
 
     @PostMapping(value = "/")
-    public ResponseEntity<?> saveSchedule(@RequestBody ScheduleDTO scheduleDTO, BindingResult result) {
+    public ResponseEntity<ResponseREST> saveSchedule(@RequestBody ScheduleDTO scheduleDTO, BindingResult result) {
         if(result.hasErrors()){
             return super.getBadRequest(result);
         }
@@ -138,16 +139,14 @@ public class ScheduleController extends GenericController {
         try {
             TutorDTO tutorDTO = this.tutorService.findTutorById(scheduleDTO.getTutorDTO().getId());
             if(tutorDTO == null)  return super.getBadRequest("Tutor no se encuentra registrado");
-            //UserDTO studentDTO = this.userService.findStudentById(scheduleDTO.getUserDTO().getId());
-            //if(studentDTO == null)  return super.getBadRequest("Estudiante no se encuentra registrado");
 
             List<Map<String, String>> resultValidRangeTime = this.scheduleService.isValidRangeTime(scheduleDTO);
-            if(resultValidRangeTime.size() > 0) {
+            if(!resultValidRangeTime.isEmpty()) {
                 return super.getBadRequest(resultValidRangeTime);
             }
 
             ScheduleDTO resultScheduleDTO = this.scheduleService.saveSchedule(scheduleDTO);
-            //ScheduleDTO resultScheduleDTO = null;
+
             return super.getCreatedRequest(resultScheduleDTO);
         } catch (Exception ex){
             log.error(ex.getMessage());
@@ -156,7 +155,7 @@ public class ScheduleController extends GenericController {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<?> saveSchedule(@PathVariable Long id, @RequestBody ScheduleDTO scheduleDTO, BindingResult result) {
+    public ResponseEntity<ResponseREST> saveSchedule(@PathVariable Long id, @RequestBody ScheduleDTO scheduleDTO, BindingResult result) {
         if(result.hasErrors()){
             return super.getBadRequest(result);
         }
@@ -170,13 +169,8 @@ public class ScheduleController extends GenericController {
             UserDTO studentDTO = this.userService.findStudentById(scheduleDTO.getUserDTO().getId());
             if(studentDTO == null)  return super.getBadRequest("Estudiante no se encuentra registrado");
 
-            //List<Map<String, String>> resultValidRangeTime = this.scheduleService.isValidRangeTime(scheduleDTO);
-            //if(resultValidRangeTime.size() > 0) {
-            //    return super.getBadRequest(resultValidRangeTime);
-            //}
-
             ScheduleDTO resultScheduleDTO = this.scheduleService.updateSchedule(id, scheduleDTO);
-            //ScheduleDTO resultScheduleDTO = null;
+
             return super.getCreatedRequest(resultScheduleDTO);
         } catch (Exception ex){
             log.error(ex.getMessage());
