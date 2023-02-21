@@ -70,6 +70,8 @@ public class UserService implements IUserService{
         updatedUser.setUserType(userTypeEntity);
         if(userDTO.getUserTypeDTO().getId() == 1) {
             Tutor tutor = this.tutorRepository.findByUserId(userDTO.getId());
+            tutor.setProductImageUrl(userDTO.getTutorDTO().getProductImageUrl());
+            tutor.setProfileImageUrl(userDTO.getTutorDTO().getProfileImageUrl());
             tutor.setDescription(updatedUser.getTutor().getDescription());
             tutor.setPricePerHour(updatedUser.getTutor().getPricePerHour());
             tutor.setUser(updatedUser);
