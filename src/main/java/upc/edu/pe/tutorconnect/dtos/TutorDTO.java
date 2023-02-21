@@ -18,9 +18,6 @@ public class TutorDTO {
     private String profileImageUrl;
     private double pricePerHour;
 
-    private String productImageUrl;
-
-    private String profileImageUrl;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private UserDTO userDTO;
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
