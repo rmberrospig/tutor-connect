@@ -31,8 +31,8 @@ class TutorServiceTests {
         Long id = 2L;
         List<Tutor> lst = new ArrayList<Tutor>() {
             {
-                add(new Tutor(1L,"Tutor con 5 años de experiencia",60.00, null, new ArrayList<Subject>()));
-                add(new Tutor(2L,"Tutor con 7 años de experiencia",80.00, null, new ArrayList<Subject>()));
+                add(new Tutor(1L,"Tutor con 5 años de experiencia","productImage", "profileImage",60.00, null, new ArrayList<Subject>()));
+                add(new Tutor(2L,"Tutor con 7 años de experiencia","productImage", "profileImage", 80.00, null, new ArrayList<Subject>()));
             }
         };
         when(this.tutorRepository.findById(id)).thenReturn(lst.stream().filter(tutor -> id.equals(tutor.getId())).findAny());

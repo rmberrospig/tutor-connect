@@ -177,7 +177,7 @@ class UserServiceTests {
     void saveUserTest() throws ServiceException {
         Subject subject = new Subject(1L, "Calculo I", null);
         User user =  new User(1L,"rmberrospig","password","Rodrigo Miguel","Berrospi", "rmberrospig@gmail.com", new UserType(1L, "TUTOR"), null);
-        Tutor tutor = new Tutor(1L, "Tutor con experiencia", 60.00, user, new ArrayList<Subject>() {{
+        Tutor tutor = new Tutor(1L, "Tutor con experiencia","productImage", "profileImage", 60.00, user, new ArrayList<Subject>() {{
             add(subject);
         }});
         user.setTutor(tutor);
@@ -195,7 +195,7 @@ class UserServiceTests {
     void updateUserTest() throws ServiceException {
         Long id = 1L;
         User user =  new User(1L,"rmberrospig","password","Rodrigo","Berrospi", "rmberrospig@gmail.com", new UserType(1L, "TUTOR"), null);
-        Tutor tutor = new Tutor(1L, "Tutor con experiencia", 60.00, user, new ArrayList<Subject>() {{
+        Tutor tutor = new Tutor(1L, "Tutor con experiencia","productImage", "profileImage", 60.00, user, new ArrayList<Subject>() {{
             add(new Subject(1L, "Calculo I", null));
         }});
         user.setTutor(tutor);
