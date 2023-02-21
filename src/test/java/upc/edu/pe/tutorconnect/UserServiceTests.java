@@ -15,7 +15,9 @@ import upc.edu.pe.tutorconnect.entities.UserType;
 import upc.edu.pe.tutorconnect.mappers.ISubjectMapper;
 import upc.edu.pe.tutorconnect.mappers.IUserMapper;
 import upc.edu.pe.tutorconnect.repositories.ISubjectRepository;
+import upc.edu.pe.tutorconnect.repositories.ITutorRepository;
 import upc.edu.pe.tutorconnect.repositories.IUserRepository;
+import upc.edu.pe.tutorconnect.repositories.IUserTypeRepository;
 import upc.edu.pe.tutorconnect.services.ISubjectService;
 import upc.edu.pe.tutorconnect.services.IUserService;
 import upc.edu.pe.tutorconnect.services.exceptions.ServiceException;
@@ -35,6 +37,10 @@ class UserServiceTests {
     private IUserRepository userRepository;
     @MockBean
     private ISubjectRepository subjectRepository;
+    @MockBean
+    private ITutorRepository tutorRepository;
+    @MockBean
+    private IUserTypeRepository userTypeRepository;
     @Autowired
     private IUserService userService;
     @Autowired
@@ -193,8 +199,11 @@ class UserServiceTests {
             add(new Subject(1L, "Calculo I", null));
         }});
         user.setTutor(tutor);
+        UserType userType = new UserType(1L, "TUTOR");
 
         when(this.userRepository.findById(id)).thenReturn(Optional.of(user));
+        when(this.userTypeRepository.findById(id)).thenReturn(Optional.of(userType));
+        when(this.tutorRepository.findByUserId(id)).thenReturn(tutor);
         when(this.userRepository.save(any(User.class))).thenReturn(user);
 
         UserDTO userDTO = this.userMapper.toDTO(user);
