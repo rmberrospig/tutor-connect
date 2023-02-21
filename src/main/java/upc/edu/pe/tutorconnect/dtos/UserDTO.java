@@ -13,11 +13,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UserDTO {
     private Long id;
-
     @NotNull(message = "Username es obligatorio")
     @NotBlank(message = "Username no debe estar vacio")
     private String username;
-
     @NotBlank(message = "Password no debe estar vacio")
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String password;

@@ -55,7 +55,8 @@ public class SubjectService implements ISubjectService {
     @Override
     public void deleteSubject(Long id) throws ServiceException {
         SubjectDTO findSubject = this.findById(id);
-        if(findSubject == null)  throw new ServiceException("Curso con ID: " + String.valueOf(id) + " no existe");
+        String idValue = String.valueOf(id);
+        if(findSubject == null)  throw new ServiceException("Curso con ID: " + idValue + " no existe");
         this.subjectRepository.deleteById(id);
     }
 }

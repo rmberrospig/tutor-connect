@@ -24,7 +24,7 @@ public class SubjectController extends GenericController {
     public ResponseEntity<?> getAllSubjects() {
         try {
             List<SubjectDTO> lst = this.subjectService.findAllSubjects();
-            if(lst == null || lst.size() == 0){
+            if(lst == null || lst.isEmpty()) {
                 return super.getNotContentRequest();
             }
             return super.getSuccessRequest(lst);

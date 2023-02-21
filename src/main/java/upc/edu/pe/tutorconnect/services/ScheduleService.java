@@ -72,6 +72,8 @@ public class ScheduleService implements IScheduleService {
     @Override
     public List<Map<String, String>> isValidRangeTime(ScheduleDTO scheduleDTO) {
         List<Map<String, String>> messages = new ArrayList<>();
+        String horaInicio = "horaInicio";
+        String horaFin = "horaFin";
 
         LocalTime startTime = null;
         LocalTime endTime = null;
@@ -81,52 +83,50 @@ public class ScheduleService implements IScheduleService {
 
         if(startTime.isAfter(endTime)) {
             Map<String, String> error = new HashMap<>();
-            error.put("horaInicio", "La hora inicio no puede ser superior a la hora fin");
+            error.put(horaInicio, "La hora inicio no puede ser superior a la hora fin");
             messages.add(error);
             return messages;
         }
 
         if(startTime.until(endTime, ChronoUnit.HOURS) != 1) {
             Map<String, String> error = new HashMap<>();
-            error.put("horaInicio", "La diferencia entre hora inicio y hora fin solo puede ser de 1 hora");
+            error.put(horaInicio, "La diferencia entre hora inicio y hora fin solo puede ser de 1 hora");
             messages.add(error);
             return messages;
         }
 
         List<ScheduleDTO> scheduleDTOList = this.schedulerMapper.getSchedulersDTO(this.scheduleRepository.findAllByTutorIdAndDate(scheduleDTO.getTutorDTO().getId(), scheduleDTO.getDate() ));
 
-        boolean isValidStartTime = this.isValidStartTime(scheduleDTO.getStartTime(), scheduleDTOList);
-        boolean isValidEndTime = this.isValidEndTime(scheduleDTO.getEndTime(), scheduleDTOList);
+        boolean isValidStartTime = this.isValidStartTime(startTime, scheduleDTOList);
+        boolean isValidEndTime = this.isValidEndTime(endTime, scheduleDTOList);
 
         if(!isValidStartTime) {
             Map<String, String> error = new HashMap<>();
-            error.put("horaInicio", "La hora inicio ya se encuentra registrada o se cruza con otro horario ya registrado");
+            error.put(horaInicio, "La hora inicio ya se encuentra registrada o se cruza con otro horario ya registrado");
             messages.add(error);
         }
 
         if(!isValidEndTime) {
             Map<String, String> error = new HashMap<>();
-            error.put("horaFin", "La hora fin ya se encuentra registrada o se cruza con otro horario ya registrado");
+            error.put(horaFin, "La hora fin ya se encuentra registrada o se cruza con otro horario ya registrado");
             messages.add(error);
         }
 
         return messages;
     }
 
-    private boolean isValidStartTime(String startTime, List<ScheduleDTO> scheduleDTOList) {
-        LocalTime time = LocalTime.parse(startTime);
-        Long result = scheduleDTOList.stream().filter(s -> LocalTime.parse(s.getStartTime()).equals(time)).count();
+    private boolean isValidStartTime(LocalTime startTime, List<ScheduleDTO> scheduleDTOList) {
+        Long result = scheduleDTOList.stream().filter(s -> LocalTime.parse(s.getStartTime()).equals(startTime)).count();
         if (result > 0) return false;
-        result = scheduleDTOList.stream().filter(s -> LocalTime.parse(s.getStartTime()).isBefore(time) && LocalTime.parse(s.getEndTime()).isAfter(time)).count();
+        result = scheduleDTOList.stream().filter(s -> LocalTime.parse(s.getStartTime()).isBefore(startTime) && LocalTime.parse(s.getEndTime()).isAfter(startTime)).count();
         if (result > 0) return false;
         return true;
     }
 
-    private boolean isValidEndTime(String endTime, List<ScheduleDTO> scheduleDTOList) {
-        LocalTime time = LocalTime.parse(endTime);
-        Long result = scheduleDTOList.stream().filter(s -> LocalTime.parse(s.getEndTime()).equals(time)).count();
+    private boolean isValidEndTime(LocalTime endTime, List<ScheduleDTO> scheduleDTOList) {
+        Long result = scheduleDTOList.stream().filter(s -> LocalTime.parse(s.getEndTime()).equals(endTime)).count();
         if (result > 0) return false;
-        result = scheduleDTOList.stream().filter(s -> LocalTime.parse(s.getStartTime()).isBefore(time) && LocalTime.parse(s.getEndTime()).isAfter(time)).count();
+        result = scheduleDTOList.stream().filter(s -> LocalTime.parse(s.getStartTime()).isBefore(endTime) && LocalTime.parse(s.getEndTime()).isAfter(endTime)).count();
         if (result > 0) return false;
         return true;
     }
@@ -138,6 +138,7 @@ public class ScheduleService implements IScheduleService {
         schedule.setTutor(tutor);
         //User user = this.userRepository.findById(schedule.getUser().getId()).orElse(null);
         //schedule.setUser(user);
+        //Schedule result = this.scheduleRepository.save(schedule);
         return this.schedulerMapper.toDTO(this.scheduleRepository.save(schedule));
     }
 
@@ -150,6 +151,7 @@ public class ScheduleService implements IScheduleService {
             User user = this.userRepository.findById(scheduleDTO.getUserDTO().getId()).orElse(null);
             schedule.setUser(user);
         }
+        //Schedule result = this.scheduleRepository.save(schedule);
         return this.schedulerMapper.toDTO(this.scheduleRepository.save(schedule));
     }
 

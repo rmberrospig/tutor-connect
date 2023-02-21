@@ -1,16 +1,15 @@
 package upc.edu.pe.tutorconnect.controllers.constants;
 
-import org.springframework.beans.factory.annotation.Value;
 
 public class ResponseConstant {
 
-    public final static String API_USER = "/v1/user";
-    public final static String API_SUBJECT = "/v1/subject";
-    public final static String API_SCHEDULE = "/v1/schedule";
-    public final static String MSG_SUCCESS = "OPERACION EXITOSA";
-    public final static String MSG_ALERT = "OPERACION CON OBSERVACIONES";
-    public final static String MSG_ERROR = "OPERACION CON ERROR";
-    public final static String MSG_NOT_FOUND = "NO ENCONTRADO";
-    public final static String MSG_NOT_CONTENT = "SIN CONTENIDO";
+    public static final String API_USER = "/v1/user";
+    public static final String API_SUBJECT = "/v1/subject";
+    public static final String API_SCHEDULE = "/v1/schedule";
+    public static final String MSG_SUCCESS = "OPERACION EXITOSA";
+    public static final String MSG_ALERT = "OPERACION CON OBSERVACIONES";
+    public static final String MSG_ERROR = "OPERACION CON ERROR";
+    public static final String MSG_NOT_FOUND = "NO ENCONTRADO";
+    public static final String MSG_NOT_CONTENT = "SIN CONTENIDO";
 
 }

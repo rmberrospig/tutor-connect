@@ -4,8 +4,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import upc.edu.pe.tutorconnect.entities.Subject;
-import upc.edu.pe.tutorconnect.entities.User;
 
 import java.util.ArrayList;
 import java.util.List;

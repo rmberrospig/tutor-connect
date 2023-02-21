@@ -15,5 +15,5 @@ public interface ISubjectMapper extends ITutorSubjectMapper {
     @Mapping(target = "tutorsDTO", expression = "java(getTutorsDTO(target.getTutors()))")
     SubjectDTO toDTO(Subject target);
 
-
+    List<SubjectDTO> getSubjectsDTO(List<Subject> subjects);
 }
