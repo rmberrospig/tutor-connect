@@ -113,10 +113,10 @@ class ScheduleServiceTests {
         Long id = 1L;
         List<Schedule> lst = new ArrayList<Schedule>() {
             {
-                add(new Schedule(1L, LocalDate.parse("2023-02-03"), LocalTime.parse("10:00"),LocalTime.parse("11:00"), null, new Tutor(1L,"Tutor con 5 años de experiencia",60.00, null, new ArrayList<Subject>())));
-                add(new Schedule(2L, LocalDate.parse("2023-02-04"), LocalTime.parse("11:00"),LocalTime.parse("12:00"), new User(1L,"pepe","password","Pepe","Perez", "pepe@gmail.com", new UserType(2L, "ESTUDIANTE"), null), new Tutor(3L,"Tutor con 15 años de experiencia",60.00, null, new ArrayList<Subject>())));
-                add(new Schedule(3L, LocalDate.parse("2023-02-04"), LocalTime.parse("12:00"),LocalTime.parse("13:00"), new User(3L,"ana","password","Ana","Perez", "ana@gmail.com", new UserType(2L, "ESTUDIANTE"), null), new Tutor(1L,"Tutor con 5 años de experiencia",60.00, null, new ArrayList<Subject>())));
-                add(new Schedule(4L, LocalDate.parse("2023-02-04"), LocalTime.parse("13:00"),LocalTime.parse("14:00"), null, new Tutor(1L,"Tutor con 5 años de experiencia",60.00, null, new ArrayList<Subject>())));
+                add(new Schedule(1L, LocalDate.parse("2023-02-03"), LocalTime.parse("10:00"),LocalTime.parse("11:00"), null, new Tutor(1L,"Tutor con 5 años de experiencia","productImage", "profileImage",60.00, null, new ArrayList<Subject>())));
+                add(new Schedule(2L, LocalDate.parse("2023-02-04"), LocalTime.parse("11:00"),LocalTime.parse("12:00"), new User(1L,"pepe","password","Pepe","Perez", "pepe@gmail.com", new UserType(2L, "ESTUDIANTE"), null), new Tutor(3L,"Tutor con 15 años de experiencia","productImage", "profileImage",60.00, null, new ArrayList<Subject>())));
+                add(new Schedule(3L, LocalDate.parse("2023-02-04"), LocalTime.parse("12:00"),LocalTime.parse("13:00"), new User(3L,"ana","password","Ana","Perez", "ana@gmail.com", new UserType(2L, "ESTUDIANTE"), null), new Tutor(1L,"Tutor con 5 años de experiencia","productImage", "profileImage",60.00, null, new ArrayList<Subject>())));
+                add(new Schedule(4L, LocalDate.parse("2023-02-04"), LocalTime.parse("13:00"),LocalTime.parse("14:00"), null, new Tutor(1L,"Tutor con 5 años de experiencia","productImage", "profileImage",60.00, null, new ArrayList<Subject>())));
             }
         };
 
@@ -133,10 +133,10 @@ class ScheduleServiceTests {
         Long id = 1L;
         List<Schedule> lst = new ArrayList<Schedule>() {
             {
-                add(new Schedule(1L, LocalDate.parse("2023-02-03"), LocalTime.parse("10:00"),LocalTime.parse("11:00"), null, new Tutor(1L,"Tutor con 5 años de experiencia",60.00, null, new ArrayList<Subject>())));
-                add(new Schedule(2L, LocalDate.parse("2023-02-04"), LocalTime.parse("11:00"),LocalTime.parse("12:00"), new User(1L,"pepe","password","Pepe","Perez", "pepe@gmail.com", new UserType(2L, "ESTUDIANTE"), null), new Tutor(3L,"Tutor con 15 años de experiencia",60.00, null, new ArrayList<Subject>())));
-                add(new Schedule(3L, LocalDate.parse("2023-02-04"), LocalTime.parse("12:00"),LocalTime.parse("13:00"), new User(3L,"ana","password","Ana","Perez", "ana@gmail.com", new UserType(2L, "ESTUDIANTE"), null), new Tutor(1L,"Tutor con 5 años de experiencia",60.00, null, new ArrayList<Subject>())));
-                add(new Schedule(4L, LocalDate.parse("2023-02-04"), LocalTime.parse("13:00"),LocalTime.parse("14:00"), null, new Tutor(1L,"Tutor con 5 años de experiencia",60.00, null, new ArrayList<Subject>())));
+                add(new Schedule(1L, LocalDate.parse("2023-02-03"), LocalTime.parse("10:00"),LocalTime.parse("11:00"), null, new Tutor(1L,"Tutor con 5 años de experiencia","productImage", "profileImage",60.00, null, new ArrayList<Subject>())));
+                add(new Schedule(2L, LocalDate.parse("2023-02-04"), LocalTime.parse("11:00"),LocalTime.parse("12:00"), new User(1L,"pepe","password","Pepe","Perez", "pepe@gmail.com", new UserType(2L, "ESTUDIANTE"), null), new Tutor(3L,"Tutor con 15 años de experiencia","productImage", "profileImage",60.00, null, new ArrayList<Subject>())));
+                add(new Schedule(3L, LocalDate.parse("2023-02-04"), LocalTime.parse("12:00"),LocalTime.parse("13:00"), new User(3L,"ana","password","Ana","Perez", "ana@gmail.com", new UserType(2L, "ESTUDIANTE"), null), new Tutor(1L,"Tutor con 5 años de experiencia","productImage", "profileImage",60.00, null, new ArrayList<Subject>())));
+                add(new Schedule(4L, LocalDate.parse("2023-02-04"), LocalTime.parse("13:00"),LocalTime.parse("14:00"), null, new Tutor(1L,"Tutor con 5 años de experiencia","productImage", "profileImage",60.00, null, new ArrayList<Subject>())));
             }
         };
 
@@ -152,10 +152,10 @@ class ScheduleServiceTests {
         Long id = 1L;
         List<Schedule> lst = new ArrayList<Schedule>() {
             {
-                add(new Schedule(1L, LocalDate.parse("2023-02-03"), LocalTime.parse("10:00"),LocalTime.parse("11:00"), null, new Tutor(1L,"Tutor con 5 años de experiencia",60.00, null, new ArrayList<Subject>())));
-                add(new Schedule(2L, LocalDate.parse("2023-02-04"), LocalTime.parse("11:00"),LocalTime.parse("12:00"), new User(1L,"pepe","password","Pepe","Perez", "pepe@gmail.com", new UserType(2L, "ESTUDIANTE"), null), new Tutor(3L,"Tutor con 15 años de experiencia",60.00, null, new ArrayList<Subject>())));
-                add(new Schedule(3L, LocalDate.parse("2023-02-04"), LocalTime.parse("12:00"),LocalTime.parse("13:00"), new User(3L,"ana","password","Ana","Perez", "ana@gmail.com", new UserType(2L, "ESTUDIANTE"), null), new Tutor(1L,"Tutor con 5 años de experiencia",60.00, null, new ArrayList<Subject>())));
-                add(new Schedule(4L, LocalDate.parse("2023-02-04"), LocalTime.parse("13:00"),LocalTime.parse("14:00"), null, new Tutor(1L,"Tutor con 5 años de experiencia",60.00, null, new ArrayList<Subject>())));
+                add(new Schedule(1L, LocalDate.parse("2023-02-03"), LocalTime.parse("10:00"),LocalTime.parse("11:00"), null, new Tutor(1L,"Tutor con 5 años de experiencia","productImage", "profileImage",60.00, null, new ArrayList<Subject>())));
+                add(new Schedule(2L, LocalDate.parse("2023-02-04"), LocalTime.parse("11:00"),LocalTime.parse("12:00"), new User(1L,"pepe","password","Pepe","Perez", "pepe@gmail.com", new UserType(2L, "ESTUDIANTE"), null), new Tutor(3L,"Tutor con 15 años de experiencia","productImage", "profileImage",60.00, null, new ArrayList<Subject>())));
+                add(new Schedule(3L, LocalDate.parse("2023-02-04"), LocalTime.parse("12:00"),LocalTime.parse("13:00"), new User(3L,"ana","password","Ana","Perez", "ana@gmail.com", new UserType(2L, "ESTUDIANTE"), null), new Tutor(1L,"Tutor con 5 años de experiencia","productImage", "profileImage",60.00, null, new ArrayList<Subject>())));
+                add(new Schedule(4L, LocalDate.parse("2023-02-04"), LocalTime.parse("13:00"),LocalTime.parse("14:00"), null, new Tutor(1L,"Tutor con 5 años de experiencia","productImage", "profileImage",60.00, null, new ArrayList<Subject>())));
             }
         };
 
@@ -170,10 +170,10 @@ class ScheduleServiceTests {
         Long id = 3L;
         List<Schedule> lst = new ArrayList<Schedule>() {
             {
-                add(new Schedule(1L, LocalDate.parse("2023-02-03"), LocalTime.parse("10:00"),LocalTime.parse("11:00"), null, new Tutor(1L,"Tutor con 5 años de experiencia",60.00, null, new ArrayList<Subject>())));
-                add(new Schedule(2L, LocalDate.parse("2023-02-04"), LocalTime.parse("11:00"),LocalTime.parse("12:00"), new User(1L,"pepe","password","Pepe","Perez", "pepe@gmail.com", new UserType(2L, "ESTUDIANTE"), null), new Tutor(3L,"Tutor con 15 años de experiencia",60.00, null, new ArrayList<Subject>())));
-                add(new Schedule(3L, LocalDate.parse("2023-02-04"), LocalTime.parse("12:00"),LocalTime.parse("13:00"), new User(3L,"ana","password","Ana","Perez", "ana@gmail.com", new UserType(2L, "ESTUDIANTE"), null), new Tutor(1L,"Tutor con 5 años de experiencia",60.00, null, new ArrayList<Subject>())));
-                add(new Schedule(4L, LocalDate.parse("2023-02-04"), LocalTime.parse("13:00"),LocalTime.parse("14:00"), null, new Tutor(1L,"Tutor con 5 años de experiencia",60.00, null, new ArrayList<Subject>())));
+                add(new Schedule(1L, LocalDate.parse("2023-02-03"), LocalTime.parse("10:00"),LocalTime.parse("11:00"), null, new Tutor(1L,"Tutor con 5 años de experiencia","productImage", "profileImage",60.00, null, new ArrayList<Subject>())));
+                add(new Schedule(2L, LocalDate.parse("2023-02-04"), LocalTime.parse("11:00"),LocalTime.parse("12:00"), new User(1L,"pepe","password","Pepe","Perez", "pepe@gmail.com", new UserType(2L, "ESTUDIANTE"), null), new Tutor(3L,"Tutor con 15 años de experiencia","productImage", "profileImage",60.00, null, new ArrayList<Subject>())));
+                add(new Schedule(3L, LocalDate.parse("2023-02-04"), LocalTime.parse("12:00"),LocalTime.parse("13:00"), new User(3L,"ana","password","Ana","Perez", "ana@gmail.com", new UserType(2L, "ESTUDIANTE"), null), new Tutor(1L,"Tutor con 5 años de experiencia","productImage", "profileImage",60.00, null, new ArrayList<Subject>())));
+                add(new Schedule(4L, LocalDate.parse("2023-02-04"), LocalTime.parse("13:00"),LocalTime.parse("14:00"), null, new Tutor(1L,"Tutor con 5 años de experiencia","productImage", "profileImage",60.00, null, new ArrayList<Subject>())));
             }
         };
 
@@ -189,34 +189,34 @@ class ScheduleServiceTests {
         Long id = 1L;
         List<Schedule> lst = new ArrayList<Schedule>() {
             {
-                add(new Schedule(1L, LocalDate.parse("2023-02-03"), LocalTime.parse("10:00"),LocalTime.parse("11:00"), null, new Tutor(1L,"Tutor con 5 años de experiencia",60.00, null, new ArrayList<Subject>())));
-                add(new Schedule(2L, LocalDate.parse("2023-02-04"), LocalTime.parse("11:00"),LocalTime.parse("12:00"), new User(1L,"pepe","password","Pepe","Perez", "pepe@gmail.com", new UserType(2L, "ESTUDIANTE"), null), new Tutor(3L,"Tutor con 15 años de experiencia",60.00, null, new ArrayList<Subject>())));
-                add(new Schedule(3L, LocalDate.parse("2023-02-04"), LocalTime.parse("12:00"),LocalTime.parse("13:00"), new User(3L,"ana","password","Ana","Perez", "ana@gmail.com", new UserType(2L, "ESTUDIANTE"), null), new Tutor(1L,"Tutor con 5 años de experiencia",60.00, null, new ArrayList<Subject>())));
-                add(new Schedule(4L, LocalDate.parse("2023-02-04"), LocalTime.parse("13:00"),LocalTime.parse("14:00"), null, new Tutor(1L,"Tutor con 5 años de experiencia",60.00, null, new ArrayList<Subject>())));
+                add(new Schedule(1L, LocalDate.parse("2023-02-03"), LocalTime.parse("10:00"),LocalTime.parse("11:00"), null, new Tutor(1L,"Tutor con 5 años de experiencia","productImage", "profileImage",60.00, null, new ArrayList<Subject>())));
+                add(new Schedule(2L, LocalDate.parse("2023-02-04"), LocalTime.parse("11:00"),LocalTime.parse("12:00"), new User(1L,"pepe","password","Pepe","Perez", "pepe@gmail.com", new UserType(2L, "ESTUDIANTE"), null), new Tutor(3L,"Tutor con 15 años de experiencia","productImage", "profileImage",60.00, null, new ArrayList<Subject>())));
+                add(new Schedule(3L, LocalDate.parse("2023-02-04"), LocalTime.parse("12:00"),LocalTime.parse("13:00"), new User(3L,"ana","password","Ana","Perez", "ana@gmail.com", new UserType(2L, "ESTUDIANTE"), null), new Tutor(1L,"Tutor con 5 años de experiencia","productImage", "profileImage",60.00, null, new ArrayList<Subject>())));
+                add(new Schedule(4L, LocalDate.parse("2023-02-04"), LocalTime.parse("13:00"),LocalTime.parse("14:00"), null, new Tutor(1L,"Tutor con 5 años de experiencia","productImage", "profileImage",60.00, null, new ArrayList<Subject>())));
             }
         };
 
-        ScheduleDTO scheduleDTO = new ScheduleDTO(5L, LocalDate.parse("2023-02-04"), "13:00","12:00", new UserDTO(1L,"pepe","password","Pepe","Perez", "pepe@gmail.com", new UserTypeDTO(2L, "ESTUDIANTE"), null), new TutorDTO(id,"Tutor con 15 años de experiencia",60.00, null, new ArrayList<SubjectDTO>()));
+        ScheduleDTO scheduleDTO = new ScheduleDTO(5L, LocalDate.parse("2023-02-04"), "13:00","12:00", new UserDTO(1L,"pepe","password","Pepe","Perez", "pepe@gmail.com", new UserTypeDTO(2L, "ESTUDIANTE"), null), new TutorDTO(id,"Tutor con 15 años de experiencia","productImage", "profileImage",60.00, null, new ArrayList<SubjectDTO>()));
         List<Map<String, String>> result = this.scheduleService.isValidRangeTime(scheduleDTO);
         Assertions.assertEquals(1, result.size());
 
-        scheduleDTO = new ScheduleDTO(5L, LocalDate.parse("2023-02-04"), "10:00","12:00", new UserDTO(1L,"pepe","password","Pepe","Perez", "pepe@gmail.com", new UserTypeDTO(2L, "ESTUDIANTE"), null), new TutorDTO(id,"Tutor con 15 años de experiencia",60.00, null, new ArrayList<SubjectDTO>()));
+        scheduleDTO = new ScheduleDTO(5L, LocalDate.parse("2023-02-04"), "10:00","12:00", new UserDTO(1L,"pepe","password","Pepe","Perez", "pepe@gmail.com", new UserTypeDTO(2L, "ESTUDIANTE"), null), new TutorDTO(id,"Tutor con 15 años de experiencia","productImage", "profileImage",60.00, null, new ArrayList<SubjectDTO>()));
         result = this.scheduleService.isValidRangeTime(scheduleDTO);
         Assertions.assertEquals(1, result.size());
 
         when(this.scheduleRepository.findAllByTutorIdAndDate(id, date)).thenReturn(lst.stream().filter(schedule -> date.equals(schedule.getDate()) && id.equals(schedule.getTutor().getId())).collect(Collectors.toList()));
-        scheduleDTO = new ScheduleDTO(5L, LocalDate.parse("2023-02-04"), "12:00","13:00", new UserDTO(1L,"pepe","password","Pepe","Perez", "pepe@gmail.com", new UserTypeDTO(2L, "ESTUDIANTE"), null), new TutorDTO(id,"Tutor con 15 años de experiencia",60.00, null, new ArrayList<SubjectDTO>()));
+        scheduleDTO = new ScheduleDTO(5L, LocalDate.parse("2023-02-04"), "12:00","13:00", new UserDTO(1L,"pepe","password","Pepe","Perez", "pepe@gmail.com", new UserTypeDTO(2L, "ESTUDIANTE"), null), new TutorDTO(id,"Tutor con 15 años de experiencia","productImage", "profileImage",60.00, null, new ArrayList<SubjectDTO>()));
         result = this.scheduleService.isValidRangeTime(scheduleDTO);
         Assertions.assertEquals(2, result.size());
         //verify(scheduleRepository, Mockito.times(1)).findAllByTutorIdAndDate(id, date);
 
         //when(this.scheduleRepository.findAllByTutorIdAndDate(id, date)).thenReturn(lst.stream().filter(schedule -> date.equals(schedule.getDate()) && id.equals(schedule.getTutor().getId())).collect(Collectors.toList()));
-        scheduleDTO = new ScheduleDTO(5L, LocalDate.parse("2023-02-04"), "12:30","13:30", new UserDTO(1L,"pepe","password","Pepe","Perez", "pepe@gmail.com", new UserTypeDTO(2L, "ESTUDIANTE"), null), new TutorDTO(id,"Tutor con 15 años de experiencia",60.00, null, new ArrayList<SubjectDTO>()));
+        scheduleDTO = new ScheduleDTO(5L, LocalDate.parse("2023-02-04"), "12:30","13:30", new UserDTO(1L,"pepe","password","Pepe","Perez", "pepe@gmail.com", new UserTypeDTO(2L, "ESTUDIANTE"), null), new TutorDTO(id,"Tutor con 15 años de experiencia","productImage", "profileImage",60.00, null, new ArrayList<SubjectDTO>()));
         result = this.scheduleService.isValidRangeTime(scheduleDTO);
         Assertions.assertEquals(2, result.size());
         verify(scheduleRepository, Mockito.times(2)).findAllByTutorIdAndDate(id, date);
 
-        scheduleDTO = new ScheduleDTO(5L, LocalDate.parse("2023-02-04"), "15:00","16:00", new UserDTO(1L,"pepe","password","Pepe","Perez", "pepe@gmail.com", new UserTypeDTO(2L, "ESTUDIANTE"), null), new TutorDTO(id,"Tutor con 15 años de experiencia",60.00, null, new ArrayList<SubjectDTO>()));
+        scheduleDTO = new ScheduleDTO(5L, LocalDate.parse("2023-02-04"), "15:00","16:00", new UserDTO(1L,"pepe","password","Pepe","Perez", "pepe@gmail.com", new UserTypeDTO(2L, "ESTUDIANTE"), null), new TutorDTO(id,"Tutor con 15 años de experiencia","productImage", "profileImage",60.00, null, new ArrayList<SubjectDTO>()));
         result = this.scheduleService.isValidRangeTime(scheduleDTO);
         Assertions.assertEquals(0, result.size());
         verify(scheduleRepository, Mockito.times(3)).findAllByTutorIdAndDate(id, date);
@@ -224,7 +224,7 @@ class ScheduleServiceTests {
 
     @Test
     void saveScheduleTest() {
-        Schedule schedule = new Schedule(5L, LocalDate.parse("2023-02-04"), LocalTime.parse("15:00"),LocalTime.parse("16:00"), new User(1L,"pepe","password","Pepe","Perez", "pepe@gmail.com", new UserType(2L, "ESTUDIANTE"), null), new Tutor(1L,"Tutor con 15 años de experiencia",60.00, null, new ArrayList<Subject>()));
+        Schedule schedule = new Schedule(5L, LocalDate.parse("2023-02-04"), LocalTime.parse("15:00"),LocalTime.parse("16:00"), new User(1L,"pepe","password","Pepe","Perez", "pepe@gmail.com", new UserType(2L, "ESTUDIANTE"), null), new Tutor(1L,"Tutor con 15 años de experiencia","productImage", "profileImage",60.00, null, new ArrayList<Subject>()));
 
         when(this.scheduleRepository.save(any(Schedule.class))).thenReturn(schedule);
         ScheduleDTO scheduleDTO = this.schedulerMapper.toDTO(schedule);
@@ -239,9 +239,9 @@ class ScheduleServiceTests {
         Long userId = 1L;
         Long tutorId = 1L;
 
-        Schedule schedule = new Schedule(id, LocalDate.parse("2023-02-04"), LocalTime.parse("15:00"),LocalTime.parse("16:00"), new User(1L,"pepe","password","Pepe","Perez", "pepe@gmail.com", new UserType(2L, "ESTUDIANTE"), null), new Tutor(1L,"Tutor con 15 años de experiencia",60.00, null, new ArrayList<Subject>()));
+        Schedule schedule = new Schedule(id, LocalDate.parse("2023-02-04"), LocalTime.parse("15:00"),LocalTime.parse("16:00"), new User(1L,"pepe","password","Pepe","Perez", "pepe@gmail.com", new UserType(2L, "ESTUDIANTE"), null), new Tutor(1L,"Tutor con 15 años de experiencia","productImage", "profileImage",60.00, null, new ArrayList<Subject>()));
         User user =  new User(userId,"rmberrospig","password","Rodrigo","Berrospi", "rmberrospig@gmail.com", new UserType(1L, "TUTOR"), null);
-        Tutor tutor = new Tutor(tutorId, "Tutor con experiencia", 60.00, user, new ArrayList<Subject>() {{
+        Tutor tutor = new Tutor(tutorId, "Tutor con experiencia","productImage", "profileImage", 60.00, user, new ArrayList<Subject>() {{
             add(new Subject(1L, "Calculo I", null));
         }});
         user.setTutor(tutor);
@@ -262,7 +262,7 @@ class ScheduleServiceTests {
     @Test
     void deleteScheduleTest() throws ServiceException {
         Long id = 1L;
-        Schedule schedule = new Schedule(id, LocalDate.parse("2023-02-04"), LocalTime.parse("15:00"),LocalTime.parse("16:00"), new User(1L,"pepe","password","Pepe","Perez", "pepe@gmail.com", new UserType(2L, "ESTUDIANTE"), null), new Tutor(1L,"Tutor con 15 años de experiencia",60.00, null, new ArrayList<Subject>()));
+        Schedule schedule = new Schedule(id, LocalDate.parse("2023-02-04"), LocalTime.parse("15:00"),LocalTime.parse("16:00"), new User(1L,"pepe","password","Pepe","Perez", "pepe@gmail.com", new UserType(2L, "ESTUDIANTE"), null), new Tutor(1L,"Tutor con 15 años de experiencia","productImage", "profileImage",60.00, null, new ArrayList<Subject>()));
         Mockito.when(scheduleRepository.findById(id)).thenReturn(Optional.of(schedule));
         scheduleService.deleteSchedule(schedule.getId());
         verify(scheduleRepository, Mockito.times(1)).deleteById(id);

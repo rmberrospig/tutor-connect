@@ -21,9 +21,7 @@ public class Tutor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String description;
-
     private String productImageUrl;
-
     private String profileImageUrl;
     private double pricePerHour;
 

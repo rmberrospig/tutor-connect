@@ -14,6 +14,8 @@ import java.util.List;
 public class TutorDTO {
     private Long id;
     private String description;
+    private String productImageUrl;
+    private String profileImageUrl;
     private double pricePerHour;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private UserDTO userDTO;
