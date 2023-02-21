@@ -81,32 +81,32 @@ public class ScheduleService implements IScheduleService {
         startTime = LocalTime.parse(scheduleDTO.getStartTime());
         endTime = LocalTime.parse(scheduleDTO.getEndTime());
 
-        if(startTime.isAfter(endTime)) {
+        if (startTime.isAfter(endTime)) {
             Map<String, String> error = new HashMap<>();
             error.put(horaInicio, "La hora inicio no puede ser superior a la hora fin");
             messages.add(error);
             return messages;
         }
 
-        if(startTime.until(endTime, ChronoUnit.HOURS) != 1) {
+        if (startTime.until(endTime, ChronoUnit.HOURS) != 1) {
             Map<String, String> error = new HashMap<>();
             error.put(horaInicio, "La diferencia entre hora inicio y hora fin solo puede ser de 1 hora");
             messages.add(error);
             return messages;
         }
 
-        List<ScheduleDTO> scheduleDTOList = this.schedulerMapper.getSchedulersDTO(this.scheduleRepository.findAllByTutorIdAndDate(scheduleDTO.getTutorDTO().getId(), scheduleDTO.getDate() ));
+        List<ScheduleDTO> scheduleDTOList = this.schedulerMapper.getSchedulersDTO(this.scheduleRepository.findAllByTutorIdAndDate(scheduleDTO.getTutorDTO().getId(), scheduleDTO.getDate()));
 
         boolean isValidStartTime = this.isValidStartTime(startTime, scheduleDTOList);
         boolean isValidEndTime = this.isValidEndTime(endTime, scheduleDTOList);
 
-        if(!isValidStartTime) {
+        if (!isValidStartTime) {
             Map<String, String> error = new HashMap<>();
             error.put(horaInicio, "La hora inicio ya se encuentra registrada o se cruza con otro horario ya registrado");
             messages.add(error);
         }
 
-        if(!isValidEndTime) {
+        if (!isValidEndTime) {
             Map<String, String> error = new HashMap<>();
             error.put(horaFin, "La hora fin ya se encuentra registrada o se cruza con otro horario ya registrado");
             messages.add(error);
@@ -136,16 +136,16 @@ public class ScheduleService implements IScheduleService {
         Schedule schedule = this.schedulerMapper.toEntity(scheduleDTO);
         Tutor tutor = this.tutorRepository.findById(schedule.getTutor().getId()).orElse(null);
         schedule.setTutor(tutor);
-        //User user = this.userRepository.findById(schedule.getUser().getId()).orElse(null);
-        //schedule.setUser(user);
-        //Schedule result = this.scheduleRepository.save(schedule);
+        User user = this.userRepository.findById(schedule.getUser().getId()).orElse(null);
+        schedule.setUser(user);
+        // Schedule result = this.scheduleRepository.save(schedule);
         return this.schedulerMapper.toDTO(this.scheduleRepository.save(schedule));
     }
 
     @Override
     public ScheduleDTO updateSchedule(Long id, ScheduleDTO scheduleDTO) {
         Schedule schedule = this.scheduleRepository.findById(id).orElse(null);
-        if(schedule != null) {
+        if (schedule != null) {
             Tutor tutor = this.tutorRepository.findById(schedule.getTutor().getId()).orElse(null);
             schedule.setTutor(tutor);
             User user = this.userRepository.findById(scheduleDTO.getUserDTO().getId()).orElse(null);

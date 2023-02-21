@@ -21,6 +21,7 @@ public interface ISchedulerMapper {
     @Mapping(source = "user", target = "userDTO")
     @Mapping(source = "user.userType", target = "userDTO.userTypeDTO")
     @Mapping(source = "tutor", target = "tutorDTO")
+    @Mapping(source = "tutor.user", target = "tutorDTO.userDTO")
     ScheduleDTO toDTO(Schedule target);
 
     List<ScheduleDTO> getSchedulersDTO(List<Schedule> schedulers);
