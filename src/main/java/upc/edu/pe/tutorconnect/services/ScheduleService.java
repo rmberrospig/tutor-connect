@@ -24,11 +24,12 @@ public class ScheduleService implements IScheduleService {
     @Autowired
     private IScheduleRepository scheduleRepository;
     @Autowired
+    private ISchedulerMapper schedulerMapper;
+    @Autowired
     private ITutorRepository tutorRepository;
     @Autowired
     private IUserRepository userRepository;
-    @Autowired
-    private ISchedulerMapper schedulerMapper;
+
 
     @Override
     public ScheduleDTO findById(Long id) {
